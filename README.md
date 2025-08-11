@@ -1,7 +1,5 @@
 # Expense Tracker Application
 
-![Expense Tracker Screenshot](./screenshot.png) <!-- Add a screenshot later -->
-
 A web-based expense tracking application built with ASP.NET Core and Entity Framework Core, designed to help users manage their personal finances.
 
 ## Features

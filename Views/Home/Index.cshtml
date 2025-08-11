@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Side Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-rand-sign"></i>
+                <h1>SA Tracker</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-plus-circle"></i> Add Expense</a></li>
+                    <li><a href="add expense"><i class="fas fa-chart-pie"></i> Reports</a></li>
+
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <img src="" alt="User" class="avatar">
+                <div class="user-info">
+                    <span class="Hloniphani">Welcome, Hloniphani</span>
+                    <span class="user-email">hloniphani.ngoveni@eoh.com</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Expense Dashboard</h2>
+                <div class="header-actions">
+                    <div class="month-selector">
+                        <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                        <span id="currentMonth">June 2023</span>
+                        <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <button id="addExpenseBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Expense
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <section class="stats-cards">
+                <div class="stat-card total">
+                    <div class="stat-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Expenses</h3>
+                        <p id="totalExpenses">R 0.00</p>
+                    </div>
+                </div>
+                <div class="stat-card monthly">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>This Month</h3>
+                        <p id="monthlyExpenses">R 0.00</p>
+                    </div>
+                </div>
+                <div class="stat-card daily">
+                    <div class="stat-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Daily Average</h3>
+                        <p id="dailyAverage">R 0.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expense List -->
+            <section class="expense-section">
+                <div class="section-header">
+                    <h3>Recent Expenses</h3>
+                    <div class="filter-controls">
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <!-- Categories will be added by JavaScript -->
+                        </select>
+                        <input type="text" id="searchExpenses" placeholder="Search expenses...">
+                    </div>
+                </div>
+
+                <div class="expense-list" id="expenseList">
+                    <!-- Expenses will be added by JavaScript -->
+                    <div class="empty-state">
+                        <i class="fas fa-receipt"></i>
+                        <p>No expenses recorded yet</p>
+                        <button id="addFirstExpense" class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Your First Expense
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Add Expense Modal (Hidden by default) -->
+        <div class="modal-overlay" id="addExpenseModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Expense</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount (ZAR)</label>
+                        <div class="input-with-icon">
+                            <span class="currency">R</span>
+                            <input type="number" id="expenseAmount" min="0.01" step="0.01" placeholder="0.00" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDescription">Description</label>
+                        <input type="text" id="expenseDescription" placeholder="What was this expense for?" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expenseDate">Date</label>
+                            <input type="date" id="expenseDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseCategory">Category</label>
+                            <select id="expenseCategory" required>
+                                <option value="" disabled selected>Select category</option>
+                                <option value="Food & Dining">Food & Dining</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Education">Education</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseNotes">Notes (Optional)</label>
+                        <textarea id="expenseNotes" rows="3" placeholder="Any additional details..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary close-modal">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Expense</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="site.js"></script>
+</body>
+</html>

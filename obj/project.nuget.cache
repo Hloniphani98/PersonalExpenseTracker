@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5SDDUAap9qQ=",
+  "success": true,
+  "projectFilePath": "/workspaces/PersonalExpenseTracker/Tracker.csproj",
+  "expectedPackageFiles": [
+    "/home/codespace/.nuget/packages/microsoft.visualstudio.azure.containers.tools.targets/1.22.1/microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
+  ],
+  "logs": []
+}
